@@ -1,3 +1,6 @@
+from knight import Knight
+
+
 KNIGHTS = {
     "lancelot": {
         "name": "Lancelot",
@@ -91,16 +94,31 @@ def battle(knightsConfig):
 
     # lancelot
     lancelot = knightsConfig["lancelot"]
+    lancelot = Knight("Lancelot",
+                      35,
+                      100,
+                      [],
+                      {
+                                "name": "Metal Sword",
+                                "power": 50,
+                              },
+                    None)
 
     # apply armour
-    lancelot["protection"] = 0
-    for a in lancelot["armour"]:
-        lancelot["protection"] += a["protection"]
+    lancelot.apply_armour()
+    # lancelot["protection"] = 0
+    # for a in lancelot["armour"]:
+    #     lancelot["protection"] += a["protection"]
+
+
 
     # apply weapon
-    lancelot["power"] += lancelot["weapon"]["power"]
+    lancelot.apply_weapon()
+    # lancelot["power"] += lancelot["weapon"]["power"]
+
 
     # apply potion if exist
+    lancelot.apply_potion()
     if lancelot["potion"] is not None:
         if "power" in lancelot["potion"]["effect"]:
             lancelot["power"] += lancelot["potion"]["effect"]["power"]
@@ -110,6 +128,7 @@ def battle(knightsConfig):
 
         if "hp" in lancelot["potion"]["effect"]:
             lancelot["hp"] += lancelot["potion"]["effect"]["hp"]
+
 
     # arthur
     arthur = knightsConfig["arthur"]
