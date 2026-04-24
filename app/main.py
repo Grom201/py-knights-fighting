@@ -89,9 +89,24 @@ KNIGHTS = {
 }
 
 
+def create_knights(knights_config: dict) -> dict:
+    return {
+        key: Knight(
+            data["name"],
+            data["power"],
+            data["hp"],
+            data["armour"],
+            data["weapon"],
+            data["potion"],
+            0,
+        )
+        for key, data in knights_config.items()
+    }
+
+
 def battle(base_knights_config: dict) -> dict:
     # BATTLE PREPARATIONS:
-    knights = Knight.create_knights(base_knights_config)
+    knights = create_knights(base_knights_config)
 
     for knight in knights.values():
         knight.prepare_to_battle()

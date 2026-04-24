@@ -1,4 +1,3 @@
-from .equipment import armour, weapon, potion
 
 
 class Knight:
@@ -6,9 +5,9 @@ class Knight:
                  name: str,
                  power: int,
                  hp: int,
-                 armour: armour,
-                 weapon: weapon,
-                 potion: potion,
+                 armour: list[dict],
+                 weapon: dict,
+                 potion: dict | None,
                  protection: int
                  ) -> None:
         self.name = name
@@ -45,18 +44,3 @@ class Knight:
         self.apply_armour()
         self.apply_weapon()
         self.apply_potion()
-
-    @staticmethod
-    def create_knights(knights_config: dict) -> dict:
-        return {
-            key: Knight(
-                data["name"],
-                data["power"],
-                data["hp"],
-                data["armour"],
-                data["weapon"],
-                data["potion"],
-                0,
-            )
-            for key, data in knights_config.items()
-        }
