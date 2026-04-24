@@ -1,6 +1,16 @@
 from equipment import armour, weapon, potion
+
+
 class Knight:
-    def __init__(self, name, power, hp, armour: armour, weapon: weapon, potion, protection):
+    def __init__(self,
+                 name: str,
+                 power: int,
+                 hp: int,
+                 armour: armour,
+                 weapon: weapon,
+                 potion: potion,
+                 protection: int
+                 ) -> None:
         self.name = name
         self.power = power
         self.hp = hp
@@ -9,17 +19,17 @@ class Knight:
         self.potion = potion
         self.protection = protection
 
-    def apply_armour(self):
+    def apply_armour(self) -> None:
         # apply armour
         self.protection = 0
-        for a in self.armour:
-            self.protection += a["protection"]
+        for arm in self.armour:
+            self.protection += arm["protection"]
 
-    def apply_weapon(self):
+    def apply_weapon(self) -> None:
         # apply weapon
         self.power += self.weapon["power"]
 
-    def apply_potion(self):
+    def apply_potion(self) -> None:
         # apply potion if exist
         if self.potion is not None:
             if "power" in self.potion["effect"]:
@@ -30,3 +40,8 @@ class Knight:
 
             if "hp" in self.potion["effect"]:
                 self.hp += self.potion["effect"]["hp"]
+
+    def prepare_to_battle(self) -> None:
+        self.apply_armour()
+        self.apply_weapon()
+        self.apply_potion()
